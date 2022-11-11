@@ -32,7 +32,7 @@ router.post('/products',isLoggedIn,upload.array('image'),validateProduct,catchAs
   product.seller=req.user._id;
   await product.save();
   console.log(product);
-  req.flash('success','Successfully made a new campground');
+  req.flash('success','Successfully added a new product');
   res.redirect(`/products/${product._id}`);
 }));
 
