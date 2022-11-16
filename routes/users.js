@@ -40,9 +40,11 @@ router.post('/login', passport.authenticate('local', { failureFlash: true, failu
 }));
 
 router.get('/logout', catchAsync(async (req, res) => {
-    req.logout();
-    req.flash('success', "Goodbye!");
-    res.redirect('/products');
+    req.logout(req.user, err => {
+        if(err) return next(err);
+        req.flash('success', "Goodbye!");
+        res.redirect('/products');
+    });
 }));
 
 router.get('/orders', (req, res) => {
